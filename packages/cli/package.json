@@ -11,7 +11,8 @@
     "dist",
     "bin.js",
     "changelog",
-    "commit"
+    "commit",
+    "packages"
   ],
   "main": "dist/changesets-cli.cjs.js",
   "module": "dist/changesets-cli.esm.js",
@@ -43,6 +44,15 @@
       "import": "./commit/dist/changesets-cli-commit.cjs.mjs",
       "default": "./commit/dist/changesets-cli-commit.cjs.js"
     },
+    "./packages": {
+      "types": {
+        "import": "./packages/dist/changesets-cli-packages.cjs.mjs",
+        "default": "./packages/dist/changesets-cli-packages.cjs.js"
+      },
+      "module": "./packages/dist/changesets-cli-packages.esm.js",
+      "import": "./packages/dist/changesets-cli-packages.cjs.mjs",
+      "default": "./packages/dist/changesets-cli-packages.cjs.js"
+    },
     "./package.json": "./package.json",
     "./bin.js": "./bin.js"
   },
@@ -56,7 +66,8 @@
     "entrypoints": [
       "./index.ts",
       "./changelog.ts",
-      "./commit/index.ts"
+      "./commit/index.ts",
+      "./packages/index.ts"
     ],
     "exports": {
       "extra": {

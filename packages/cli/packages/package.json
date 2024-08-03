@@ -1,0 +1,4 @@
+{
+  "main": "dist/changesets-cli-packages.cjs.js",
+  "module": "dist/changesets-cli-packages.esm.js"
+}

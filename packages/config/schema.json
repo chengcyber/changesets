@@ -75,6 +75,26 @@
       "description": "Determines whether Changesets should commit the results of the add and version command.",
       "default": false
     },
+    "packages": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": [
+            {
+              "type": "string",
+              "title": "Packages Generator Path"
+            },
+            { "title": "Packages Generator Options" }
+          ],
+          "minItems": 1,
+          "maxItems": 2
+        },
+        {
+          "type": "string",
+          "title": "Packages Generator Path"
+        }
+      ]
+    },
     "privatePackages": {
       "anyOf": [
         {

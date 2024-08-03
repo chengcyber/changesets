@@ -57,6 +57,20 @@ function getNormalizedCommitOption(
   return thing;
 }
 
+function getNormalizedPackagesOption(
+  thing: WrittenConfig["packages"]
+): Config["packages"] {
+  if (!thing) {
+    return ["@changesets/cli/packages", null];
+  }
+
+  if (typeof thing === "string") {
+    return [thing, null];
+  }
+
+  return thing;
+}
+
 function getUnmatchedPatterns(
   listOfPackageNamesOrGlob: readonly string[],
   pkgNames: readonly string[]
@@ -430,6 +444,9 @@ export let parse = (json: WrittenConfig, packages: Packages): Config => {
         : normalizedAccess,
     commit: getNormalizedCommitOption(
       json.commit === undefined ? defaultWrittenConfig.commit : json.commit
+    ),
+    packages: getNormalizedPackagesOption(
+      json.packages
     ),
     fixed,
     linked,

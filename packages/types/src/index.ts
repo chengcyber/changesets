@@ -69,6 +69,7 @@ export interface PrivatePackages {
 export type Config = {
   changelog: false | readonly [string, any];
   commit: false | readonly [string, any];
+  packages: false | readonly [string, any];
   fixed: Fixed;
   linked: Linked;
   access: AccessType;
@@ -94,6 +95,7 @@ export type Config = {
 export type WrittenConfig = {
   changelog?: false | readonly [string, any] | string;
   commit?: boolean | readonly [string, any] | string;
+  packages?: readonly [string, any] | string;
   fixed?: Fixed;
   linked?: Linked;
   access?: AccessType;
@@ -161,6 +163,24 @@ export type GetVersionMessage = (
 export type CommitFunctions = {
   getAddMessage?: GetAddMessage;
   getVersionMessage?: GetVersionMessage;
+};
+
+export type Package = {
+  packageJson: PackageJSON;
+  dir: string;
+};
+
+export type GetChangedPackagesSinceRef = (
+  getChangedPackagesSinceRefOptions: {
+    cwd: string;
+    ref: string;
+    changedFilePatterns?: readonly string[];
+  },
+  packagesOptions: any
+) => Promise<Package[]>;
+
+export type PackagesFunctions = {
+  getChangedPackagesSinceRef?: GetChangedPackagesSinceRef;
 };
 
 export type PreState = {

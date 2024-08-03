@@ -1,6 +1,6 @@
 import { Config } from "@changesets/types";
-import { getChangedPackagesSinceRef } from "@changesets/git";
 import { shouldSkipPackage } from "@changesets/should-skip-package";
+import { getPackagesFunctions } from "../packages/getPackagesFunctions";
 
 export async function getVersionableChangedPackages(
   config: Config,
@@ -12,11 +12,18 @@ export async function getVersionableChangedPackages(
     ref?: string;
   }
 ) {
-  const changedPackages = await getChangedPackagesSinceRef({
-    ref: ref ?? config.baseBranch,
-    changedFilePatterns: config.changedFilePatterns,
-    cwd,
-  });
+  const [{ getChangedPackagesSinceRef }, packagesOpts] = getPackagesFunctions(
+    config.packages,
+    cwd
+  );
+  const changedPackages = await getChangedPackagesSinceRef(
+    {
+      ref: ref ?? config.baseBranch,
+      changedFilePatterns: config.changedFilePatterns,
+      cwd,
+    },
+    packagesOpts
+  );
   return changedPackages.filter(
     (pkg) =>
       !shouldSkipPackage(pkg, {
